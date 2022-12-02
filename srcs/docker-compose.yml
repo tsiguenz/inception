@@ -1,0 +1,11 @@
+version: '3'
+services:
+    web:
+        build:
+            context: nginx/
+            dockerfile: Dockerfile
+        image: nginx
+        ports:
+            - 443:443
+#        volumes:
+#            - /home/tsiguenz/data:
