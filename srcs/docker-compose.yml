@@ -1,11 +1,23 @@
 version: '3'
 services:
-    web:
+#    mariadb:
+#        build:
+#            context: mariadb/
+#            dockerfile: Dockerfile
+#        image: mariadb
+    wordpress:
         build:
-            context: nginx/
+            context: wordpress/
             dockerfile: Dockerfile
-        image: nginx
-        ports:
-            - 443:443
-#        volumes:
-#            - /home/tsiguenz/data:
+        image: wordpress
+#        depends_on:
+#           - mariadb
+#    nginx:
+#        build:
+#            context: nginx/
+#            dockerfile: Dockerfile
+#        image: nginx
+#        ports:
+#            - 443:443
+#        depends_on:
+#           - wordpress

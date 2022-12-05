@@ -10,6 +10,7 @@ clean:
 fclean: stop
 	-docker system prune -af --volumes 2> /dev/null
 
-re: fclean all
+re: stop
+	docker compose -f srcs/docker-compose.yml up -d --build
 
 .PHONY: all stop clean fclean re
