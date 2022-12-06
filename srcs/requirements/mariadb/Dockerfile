@@ -6,3 +6,5 @@ RUN apt-get update \
 	&& service mysql start
 
 CMD ["mysqld"]
+
+EXPOSE 3306

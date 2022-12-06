@@ -1,23 +1,32 @@
-version: '3'
+version: "3"
 services:
+
 #    mariadb:
-#        build:
-#            context: mariadb/
-#            dockerfile: Dockerfile
-#        image: mariadb
-    wordpress:
-        build:
-            context: wordpress/
-            dockerfile: Dockerfile
-        image: wordpress
+#        build: ./requirements/mariadb
+#        image: my_mariadb
+#        networks:
+#            - my_network
+#        environment:
+#            env_file: .env
+#
+#    wordpress:
+#        build: ./requirements/wordpress
+#        image: my_wordpress
+#        networks:
+#            - my_network
 #        depends_on:
 #           - mariadb
-#    nginx:
-#        build:
-#            context: nginx/
-#            dockerfile: Dockerfile
-#        image: nginx
-#        ports:
-#            - 443:443
+
+    nginx:
+        build: ./requirements/nginx
+        image: my_nginx
+        ports:
+            - "443:443"
+        networks:
+            - my_network
 #        depends_on:
 #           - wordpress
+
+networks:
+    my_network:
+        driver: bridge

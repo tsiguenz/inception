@@ -10,3 +10,5 @@ RUN apt-get update \
 	&& mv wp-cli.phar /usr/local/bin/wp \
 	&& wp cli update \
 	&& wp core download --allow-root
+
+EXPOSE 3306 9000
