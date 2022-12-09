@@ -7,8 +7,8 @@ RUN apt-get update && \
 COPY docker-entrypoint.sh /
 COPY 50-server.cnf /etc/mysql/mariadb.conf.d/
 
-ENTRYPOINT ["sh", "./docker-entrypoint.sh"]
+ENTRYPOINT ["bash", "docker-entrypoint.sh"]
 
-CMD ["mysqld"]
+CMD ["mysqld_safe"]
 
 EXPOSE 3306
