@@ -1,16 +1,18 @@
 all:
-	docker compose -f srcs/docker-compose.yml up -d
+	mkdir -p /home/tsiguenz/data/wordpress
+	mkdir -p /home/tsiguenz/data/database
+	-docker compose -f srcs/docker-compose.yml up -d --build
 
 stop:
-	-docker stop $(shell docker ps -q) 2> /dev/null
+	-docker compose -f srcs/docker-compose.yml stop
 
-clean:
-	docker rm $(shell docker ps -aq) 2> /dev/null
+# delete all exept images and cache
+clean: stop
+	-docker compose -f srcs/docker-compose.yml down --volumes --remove-orphans
 
-fclean: stop
+fclean: clean
 	-docker system prune -af --volumes 2> /dev/null
 
-re: stop
-	docker compose -f srcs/docker-compose.yml up -d --build
+re: stop all
 
 .PHONY: all stop clean fclean re

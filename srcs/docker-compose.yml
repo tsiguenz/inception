@@ -2,31 +2,55 @@ version: "3"
 services:
 
 #    mariadb:
+#        container_name: mariadb
 #        build: ./requirements/mariadb
-#        image: my_mariadb
+#        image: mariadb:inception
+#        restart: always
 #        networks:
-#            - my_network
-#        environment:
-#            env_file: .env
+#            - network
+#        env_file: .env
 #
-#    wordpress:
-#        build: ./requirements/wordpress
-#        image: my_wordpress
-#        networks:
-#            - my_network
+    wordpress:
+        container_name: wordpress
+        build: ./requirements/wordpress
+        image: wordpress:inception
+        restart: always
+        env_file: .env
+        networks:
+            - network
+        volumes:
+            - wordpress:/var/www/wordpress
 #        depends_on:
 #           - mariadb
 
     nginx:
+        container_name: nginx
         build: ./requirements/nginx
-        image: my_nginx
+        image: nginx:inception
         ports:
             - "443:443"
+        restart: always
         networks:
-            - my_network
-#        depends_on:
-#           - wordpress
+            - network
+        volumes:
+            - wordpress:/var/www/wordpress
+        depends_on:
+           - wordpress
 
 networks:
-    my_network:
+    network:
         driver: bridge
+
+volumes:
+    wordpress:
+      driver: local
+      driver_opts:
+        type: volume
+        o: bind
+        device: /home/tsiguenz/data/wordpress
+    database:
+      driver: local
+      driver_opts:
+        type: volume
+        o: bind
+        device: /home/tsiguenz/data/database
