@@ -1,15 +1,15 @@
 version: "3"
 services:
 
-#    mariadb:
-#        container_name: mariadb
-#        build: ./requirements/mariadb
-#        image: mariadb:inception
-#        restart: always
-#        networks:
-#            - network
-#        env_file: .env
-#
+    mariadb:
+        container_name: mariadb
+        build: ./requirements/mariadb
+        image: mariadb:inception
+        restart: always
+        networks:
+            - network
+        env_file: .env
+
     wordpress:
         container_name: wordpress
         build: ./requirements/wordpress
@@ -20,8 +20,8 @@ services:
             - network
         volumes:
             - wordpress:/var/www/wordpress
-#        depends_on:
-#           - mariadb
+        depends_on:
+           - mariadb
 
     nginx:
         container_name: nginx
