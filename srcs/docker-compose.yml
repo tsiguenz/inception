@@ -49,10 +49,10 @@ volumes:
       driver_opts:
         type: volume
         o: bind
-        device: ~/data/wordpress
+        device: /home/tsiguenz/data/wordpress
     database:
       driver: local
       driver_opts:
         type: volume
         o: bind
-        device: ~/data/database
+        device: /home/tsiguenz/data/database

@@ -68,6 +68,10 @@ define('NONCE_SALT',       '|p.MQmh{QwZsGP_C.+4`VYlCGve1Wv.cGo1O>?J-y%JEJ)t7:N}~
  */
 $table_prefix = 'wp_';
 
+/* Site configuration */
+
+define( 'WP_SITEURL', 'https://tsiguenz.42.fr/' );
+
 /**
  * For developers: WordPress debugging mode.
  *

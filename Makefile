@@ -1,6 +1,6 @@
 all:
-	mkdir -p ~/data/wordpress
-	mkdir -p ~/home/tsiguenz/data/database
+	mkdir -p /home/tsiguenz/data/wordpress
+	mkdir -p /home/tsiguenz/data/database
 	-docker compose -f srcs/docker-compose.yml up -d --build
 
 stop:
