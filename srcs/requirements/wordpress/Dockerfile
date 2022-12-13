@@ -1,7 +1,5 @@
 FROM debian:buster
 
-WORKDIR /var/www/wordpress
-
 RUN apt-get update && \
 	apt-get install -y \
 		php \
@@ -11,15 +9,15 @@ RUN apt-get update && \
  	apt-get clean
 
 COPY wp-config.php .
+COPY init_wp.sh .
 COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
-RUN wp core download --allow-root
-RUN wp core install --url="tsiguenz.42.fr" --title="test" --admin_user="$WP_ADMIN" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_MAIL" --allow-root
-RUN chown -R www-data:www-data .
 
 RUN mkdir -p /run/php/
+
+ENTRYPOINT ["bash", "init_wp.sh"]
 
 CMD ["php-fpm7.3", "-F"]
 
